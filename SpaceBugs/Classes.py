@@ -2,62 +2,63 @@ import pygame, math
 from random import randint
 
 ##############################################################################################
-class BaseClass(pygame.sprite.Sprite):	#conhetains every single sprite in the game
+class BaseClass(pygame.sprite.Sprite):	#contains every single sprite in the game
 ##############################################################################################
 	
-	allsprites = pygame.sprite.Group()
+	allsprites = pygame.sprite.Group() #all  ojects that are created 
 	# __init__(self, x, y,  image_string):
 ##############################################################################################
 	def __init__(self, x, y, image_string):
 ##############################################################################################
 
-		pygame.sprite.Sprite.__init__(self)
-		BaseClass.allsprites.add(self)
+		pygame.sprite.Sprite.__init__(self) #initializes an object
+		BaseClass.allsprites.add(self)	#adds the object to the all sprites list
 
-		self.image = pygame.image.load(image_string)
+		self.image = pygame.image.load(image_string) #variable to save an image
 		
 		self.rect = self.image.get_rect() #gets the dimentions of the image to the rectangle
-		self.rect.x = x
-		self.rect.y = y
+		self.rect.x = x	# width of an object
+		self.rect.y = y	# height of an object
 
-	def destroy(self, ClassName):
+	def destroy(self, ClassName):	#function that will destroy the object
 
-		ClassName.List.remove(self)
-		BaseClass.allsprites.remove(self)
-		del self
+		ClassName.List.remove(self)	#removes the object from the list
+		BaseClass.allsprites.remove(self)	#removes the object form the list of sprites
+		del self	#deletes the object
 
 ##############################################################################################
 class Bug(BaseClass):
 ##############################################################################################
 
-	List = pygame.sprite.Group()
-	going_right = True
-	def __init__(self, x, y,  image_string):
-		BaseClass.__init__(self, x, y, image_string)
-		Bug.List.add(self)
-		self.velx, self.vely = 0, 8
-		self.jumping, self.go_down = False, False
+	List = pygame.sprite.Group()	#sets list to the sprite group
+	going_right = True	# bugs will move to the right
 
-	def motion(self, SCREENWIDTH, SCREENHEIGHT):
-		predicted_location = self.rect.x + self.velx
+	def __init__(self, x, y,  image_string):	#initializes a function	
+		BaseClass.__init__(self, x, y, image_string)	#Initializes the baseclass
+		Bug.List.add(self)	# adds bug created to the List
+		self.velx, self.vely = 0, 8	# sets sets corresponding velocities
+		self.jumping, self.go_down = False, False	# sets jumpint and and go dows to false
 
-		if predicted_location < 0:
-			self.velx = 0
-		elif predicted_location + self.rect.width > SCREENWIDTH:
-			self.velx = 0
+	def motion(self, SCREENWIDTH, SCREENHEIGHT):	#sets motion function
+		predicted_location = self.rect.x + self.velx	# predicts the next location
 
-		self.rect.x += self.velx
+		if predicted_location < 0:	# if predicted location is out of the screen
+			self.velx = 0	# stops moving
+		elif predicted_location + self.rect.width > SCREENWIDTH:	#if predicted location is out of the screen
+			self.velx = 0	# stop moving
 
-		self.__jump(SCREENHEIGHT)
+		self.rect.x += self.velx	# keeps bug moving
 
-	def __jump(self, SCREENHEIGHT):
-		max_jump = 75
+		self.__jump(SCREENHEIGHT)	#call the jump function
 
-		if self.jumping:
-			if self.rect.y < max_jump:
-				self.go_down = True
-			if self.go_down:
-				self.rect.y += self.vely
+	def __jump(self, SCREENHEIGHT):	# defines the jump function
+		max_jump = 75	# max height = 75
+
+		if self.jumping:	# if ub is jumping
+			if self.rect.y < max_jump:	# if current height is less than the max height
+				self.go_down = True	# sets go down to true
+			if self.go_down:	# if bug is going down
+				self.rect.y += self.vely	# add the height of bug
 
 				predicted_location = self.rect.y + self.vely
 
