@@ -38,10 +38,10 @@ BOXCOLOR = WHITE
 HIGHLIGHTCOLOR = BLUE
 
 #Actual shapes. 
-DONUT = "husky.png"
-SQUARE = "kit2.jpg"
-DIAMOND = "kit3.jpg"
-LINES = 'kit2.jpg'
+DONUT = 'Donut'
+SQUARE = 'Square'
+DIAMOND = 'Diamond'
+LINES = 'Lines'
 OVAL = 'Oval'
 
 
@@ -54,6 +54,8 @@ def main():
     pygame.init()
     FPSCLOCK = pygame.time.Clock()
     WINDOWSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
+    pygame.mixer.music.load("music.mp3")
+    pygame.mixer.music.play(-1, 0.1)
 
     mousex = 100#Where our mouse will start when we run the program.
     mousey = 100
@@ -269,8 +271,7 @@ def drawShape(shape, color, boxx, boxy):
 
     left, top = leftTopCoordsOfBox(boxx, boxy) # get pixel coords from board coords
     if shape == DONUT:
-        #pygame.draw.circle(WINDOWSURF, color, (left + quarter, top + quarter, BOXSIZE - half, BOXSIZE - half), half - 2)
-        pygame.image.load(DONUT).convert()
+        pygame.draw.circle(WINDOWSURF, BGCOLOR, (left + half, top + half), quarter - 5)
     elif shape == SQUARE:
         pygame.draw.rect(WINDOWSURF, color, (left + quarter, top + quarter, BOXSIZE - half, BOXSIZE - half))
     elif shape == DIAMOND:
