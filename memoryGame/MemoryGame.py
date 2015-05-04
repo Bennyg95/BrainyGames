@@ -38,15 +38,20 @@ BOXCOLOR = WHITE
 HIGHLIGHTCOLOR = BLUE
 
 #Actual shapes. 
-DONUT = 'Donut'
-SQUARE = 'Square'
-DIAMOND = 'Diamond'
-LINES = 'Lines'
-OVAL = 'Oval'
+KAT = pygame.image.load("kit2.jpg")
+KAT = pygame.transform.scale(KAT,(40,40))
+FACE = pygame.image.load("face.jpg")
+FACE = pygame.transform.scale(FACE, (40,40))
+MINION = pygame.image.load("minion.jpg")
+MINION = pygame.transform.scale(MINION,(40,40))
+ANIMAL = pygame.image.load("animal.jpg")
+ANIMAL = pygame.transform.scale(ANIMAL, (40,40))
+DOG = pygame.image.load("dog.jpg")
+DOG = pygame.transform.scale(DOG, (40,40))
 
 
 ALLCOLORS = (BLUE, ORANGE, YELLOW, GRAY) # so it contains all of the colors.
-ALLSHAPES = (DONUT, SQUARE, DIAMOND, LINES, OVAL)#COntains all shapes.
+ALLSHAPES = (KAT, FACE, MINION, ANIMAL, DOG)#COntains all shapes.
 assert len(ALLCOLORS) * len(ALLSHAPES) * 2 >= BOARDWIDTH * BOARDHEIGHT #Makes sure the borad is bigger than the shapes/colors defined.
 
 def main():
@@ -66,7 +71,7 @@ def main():
 
     firstSelection = None
 
-    WINDOWSURF.fill(BGCOLOR)
+    WINDOWSURF.fill((25,90,90))
     startGameAnimation(mainBoard)
 
     while True: # main game loop
@@ -259,7 +264,6 @@ def isOverBox(x, y):
                 return (boxx, boxy)
     return (None, None)
 
-
 def drawHighlightBox(boxx, boxy):
     left, top = leftTopCoordsOfBox(boxx, boxy)
     pygame.draw.rect(WINDOWSURF, HIGHLIGHTCOLOR, (left - 5, top - 5, BOXSIZE + 10, BOXSIZE + 10), 4)
@@ -270,18 +274,16 @@ def drawShape(shape, color, boxx, boxy):
     half =    int(BOXSIZE * 0.5)  # syntactic sugar
 
     left, top = leftTopCoordsOfBox(boxx, boxy) # get pixel coords from board coords
-    if shape == DONUT:
-        pygame.draw.circle(WINDOWSURF, BGCOLOR, (left + half, top + half), quarter - 5)
-    elif shape == SQUARE:
-        pygame.draw.rect(WINDOWSURF, color, (left + quarter, top + quarter, BOXSIZE - half, BOXSIZE - half))
-    elif shape == DIAMOND:
-        pygame.draw.polygon(WINDOWSURF, color, ((left + half, top), (left + BOXSIZE - 1, top + half), (left + half, top + BOXSIZE - 1), (left, top + half)))
-    elif shape == LINES:
-        for i in range(0, BOXSIZE, 4):
-            pygame.draw.line(WINDOWSURF, color, (left, top + i), (left + i, top))
-    elif shape == OVAL:
-        pygame.draw.ellipse(WINDOWSURF, color, (left, top + quarter, BOXSIZE, half))
-
+    if shape == KAT:
+        WINDOWSURF.blit(KAT, (left + quarter - 5, top + quarter - 5, BOXSIZE - half, BOXSIZE - half))
+    elif shape == FACE:
+        WINDOWSURF.blit(FACE, (left + quarter - 5, top + quarter - 5, BOXSIZE - half, BOXSIZE - half))
+    elif shape == MINION:
+        WINDOWSURF.blit(MINION, (left + quarter - 5, top + quarter - 5, BOXSIZE - half, BOXSIZE - half))
+    elif shape == ANIMAL:
+        WINDOWSURF.blit(ANIMAL, (left + quarter - 5, top + quarter - 5, BOXSIZE - half, BOXSIZE - half))
+    elif shape == DOG:
+        WINDOWSURF.blit(DOG, (left + 5, top + quarter - 5, BOXSIZE, half))
 
 if __name__ == '__main__':
     main()
