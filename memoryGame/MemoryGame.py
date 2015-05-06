@@ -14,7 +14,7 @@ BOARDWIDTH = 2 #How many columns of boxes we will have.
 BOARDHEIGHT = 3 #How many roms of boxes we will have.
 #Check that there is an even number of boxxes so we are able to make pairs.
 assert (BOARDWIDTH * BOARDHEIGHT) % 2 == 0, 'Board needs to have an even number of boxes for pairs of matches.'
-BOXSIZE = 50 #Size of the boxes that will be covering the pistures.
+BOXSIZE = 100 #Size of the boxes that will be covering the pistures.
 GAPSIZE = 25 #The Gap between the boxes.
 
 XMARGIN = int((WINDOWWIDTH - (BOARDWIDTH * (BOXSIZE + GAPSIZE))) / 2) #This makes the the game be in the center of the game.
@@ -39,15 +39,15 @@ HIGHLIGHTCOLOR = BLUE
 
 #Actual shapes. 
 KAT = pygame.image.load("kit2.jpg")
-KAT = pygame.transform.scale(KAT,(40,40))
+KAT = pygame.transform.scale(KAT,(70,70))
 FACE = pygame.image.load("face.jpg")
-FACE = pygame.transform.scale(FACE, (40,40))
+FACE = pygame.transform.scale(FACE, (70,70))
 MINION = pygame.image.load("minion.jpg")
-MINION = pygame.transform.scale(MINION,(40,40))
+MINION = pygame.transform.scale(MINION,(70,70))
 ANIMAL = pygame.image.load("animal.jpg")
-ANIMAL = pygame.transform.scale(ANIMAL, (40,40))
+ANIMAL = pygame.transform.scale(ANIMAL, (70,70))
 DOG = pygame.image.load("dog.jpg")
-DOG = pygame.transform.scale(DOG, (40,40))
+DOG = pygame.transform.scale(DOG, (70,70))
 
 
 ALLCOLORS = (BLUE, ORANGE, YELLOW, GRAY) # so it contains all of the colors.
