@@ -105,7 +105,7 @@ def main():
                     shape1, color1 = getShapeAndColor(mainBoard, firstSelection[0], firstSelection[1])
                     shape2, color2 = getShapeAndColor(mainBoard, boxx, boxy)
 
-                    if shape1 != shape2 or color1 != color2:
+                    if shape1 != shape2:
                         # Icons don't match. Cover up both selections.
                         time.sleep(0.5)
                         coverBoxesAnimation(mainBoard, [(firstSelection[0], firstSelection[1]), (boxx, boxy)], REVEALSPEED)
@@ -214,9 +214,9 @@ def drawBoxCovers(board, boxes, coverage):
 def getRandomizedBoard():
     # Get a list of every possible shape in every possible color.
     icons = []
-    for color in ALLCOLORS: #for loop to go through all colors
-        for shape in ALLSHAPES:# ....and through all the shapes.
-            icons.append( (shape, color) )# Makes sure it creates every possible combination for the shapes and the colors.
+    #for color in ALLCOLORS: #for loop to go through all colors
+    for shape in ALLSHAPES:# ....and through all the shapes.
+        icons.append( (shape, color) )# Makes sure it creates every possible combination for the shapes and the colors.
 
     random.shuffle(icons) # randomize the order of the icons list
     numIconsUsed = int(BOARDWIDTH * BOARDHEIGHT / 2) #There should be different combination of shapes and colors for the amount of boxes.
